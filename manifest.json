@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Phab Username Highlighter",
+  "description": "This extension highlights your name in the phab reviewer line.",
+  "version": "1.0",
+
+  "permissions": [
+    "activeTab",
+    "cookies", 
+    "https://code.uberinternal.com/"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://code.uberinternal.com/*"],
+      "js": ["jquery-3.1.0.min.js", "content_script.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
