@@ -9,9 +9,6 @@
     "cookies", 
     "https://code.uberinternal.com/"
   ],
-  "background": {
-    "scripts": ["background.js"]
-  },
   "content_scripts": [
     {
       "matches": ["https://code.uberinternal.com/*"],
