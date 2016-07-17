@@ -15,13 +15,13 @@ chrome.storage.sync.get("othernames", function (dict) {
 
 // SAVE NEW VALUES to DISK
 
-$("#username").keypress(function() {
+$("#username").change(function() {
         chrome.storage.sync.set({'username': $("#username").val()}, function() {
           
         });
     }
 );
-$("#textarea").keypress(function() {
+$("#textarea").change(function() {
         chrome.storage.sync.set({'othernames': $("#textarea").val()}, function() {
           
         });
