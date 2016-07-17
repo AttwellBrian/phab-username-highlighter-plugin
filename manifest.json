@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Phab Username Highlighter",
   "description": "This extension highlights your name in the phab reviewer line.",
-  "version": "1.0",
+  "version": "1.1",
 
   "permissions": [
     "activeTab",
