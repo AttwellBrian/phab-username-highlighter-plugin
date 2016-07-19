@@ -6,8 +6,6 @@
 
   "permissions": [
     "activeTab",
-    "cookies", 
-    "https://code.uberinternal.com/",
     "storage"
   ],
   "browser_action": {
