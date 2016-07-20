@@ -6,7 +6,8 @@
 
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "https://code.uberinternal.com/"
   ],
   "browser_action": {
       "default_title": "Phab Username Highlighter",

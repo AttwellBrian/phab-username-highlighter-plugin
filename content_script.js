@@ -10,3 +10,50 @@ chrome.storage.sync.get(null, function (dict) {
 	});
 
 });
+
+
+$.get( "https://code.uberinternal.com/login/refresh/", function( authentication_data ) {
+	new RegExp("token\":\"(.*)\"").exec(authentication_data);
+	var csfr = RegExp.$1;
+	
+	var data = {__csrf__: csfr, output: "json"};
+	
+	$.ajax({
+		type: "POST",
+		url: "https://code.uberinternal.com/api/user.whoami",
+		data: data,
+		success: function(data) 
+		{
+			var phid = data.result.phid;
+			
+			$( ".phui-object-item-link" ).each(function() 
+			{
+				var diffLink = $(this);
+				var diffVersion = $( this ).attr("href");
+ 			   if (diffVersion[0] == "/" && diffVersion[1] == "D") {
+ 			       var diffNumber = diffVersion.substring(2);
+
+ 			       	var data = {__csrf__: csfr, output: "json", revisionid: diffNumber};
+					$.ajax({
+						type: "POST",
+						url: "https://code.uberinternal.com/api/differential.uber_getreviewers",
+						data: data,
+						success: function(reviewer_data, diffNumber) {
+							var jsonString = JSON.stringify(reviewer_data);
+							// TODO: make more generic.
+							if (JSON.stringify(reviewer_data).includes('"attwell","status":"rejected"')) {
+								// Just go ahead and remove the entire entry.
+								$( diffLink ).parent().parent().parent().parent().remove()
+							}
+							if (JSON.stringify(reviewer_data).includes('"attwell","status":"accepted"')) {
+								// Just go ahead and remove the entire entry.
+								$( diffLink ).parent().parent().parent().parent().remove()
+							}
+						}
+					});
+ 			   }
+ 			});
+		}
+	});
+
+});
