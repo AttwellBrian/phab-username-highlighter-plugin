@@ -25,6 +25,7 @@ $.get( "https://code.uberinternal.com/login/refresh/", function( authentication_
 		success: function(data) 
 		{
 			var phid = data.result.phid;
+			var username = data.result.userName;
 			
 			$( ".phui-object-item-link" ).each(function() 
 			{
@@ -40,12 +41,9 @@ $.get( "https://code.uberinternal.com/login/refresh/", function( authentication_
 						data: data,
 						success: function(reviewer_data, diffNumber) {
 							var jsonString = JSON.stringify(reviewer_data);
+							
 							// TODO: make more generic.
-							if (JSON.stringify(reviewer_data).includes('"attwell","status":"rejected"')) {
-								// Just go ahead and remove the entire entry.
-								$( diffLink ).parent().parent().parent().parent().remove()
-							}
-							if (JSON.stringify(reviewer_data).includes('"attwell","status":"accepted"')) {
+							if (JSON.stringify(reviewer_data).includes('"' + username + '","status":"accepted"')) {
 								// Just go ahead and remove the entire entry.
 								$( diffLink ).parent().parent().parent().parent().remove()
 							}
