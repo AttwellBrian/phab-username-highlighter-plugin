@@ -41,8 +41,6 @@ $.get( "https://code.uberinternal.com/login/refresh/", function( authentication_
 						data: data,
 						success: function(reviewer_data, diffNumber) {
 							var jsonString = JSON.stringify(reviewer_data);
-							
-							// TODO: make more generic.
 							if (JSON.stringify(reviewer_data).includes('"' + username + '","status":"accepted"')) {
 								// Just go ahead and remove the entire entry.
 								$( diffLink ).parent().parent().parent().parent().remove()
